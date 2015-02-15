@@ -314,7 +314,7 @@ var _options = {
 	spacing: 0.12,
 	bgOpacity: 0.9,
 	mouseUsed: false,
-	loop: true,
+	loop: false,
 	pinchToClose: true,
 	closeOnScroll: true,
 	closeOnVerticalDrag: true,
@@ -501,7 +501,7 @@ var _isOpen,
 		// We do this, because some mobile browsers trigger it on touchstart
 		if(_mouseMoveTimeout ) { 
 			framework.unbind(document, 'mousemove', _onFirstMouseMove);
-			framework.addClass(template, 'pswp-has_mouse');
+			framework.addClass(template, 'pswp--has_mouse');
 			_options.mouseUsed = true;
 			_shout('mouseUsed');
 		}
@@ -599,7 +599,7 @@ var _isOpen,
 		// (so they use left/top/width/height, instead of CSS transform)
 	
 		_transformKey = 'left';
-		framework.addClass(template, 'pswp-ie');
+		framework.addClass(template, 'pswp--ie');
 
 		_setTranslateX = function(x, elStyle) {
 			elStyle.left = x + 'px';
@@ -790,7 +790,7 @@ var publicMethods = {
 
 		self.framework = framework; // basic function
 		self.template = template; // root DOM element of PhotoSwipe
-		self.bg = framework.getChildByClass(template, 'pswp_bg');
+		self.bg = framework.getChildByClass(template, 'pswp__bg');
 
 		_initalClassName = template.className;
 		_isOpen = true;
@@ -801,8 +801,8 @@ var publicMethods = {
 		_transformKey = _features.transform;
 		_oldIE = _features.oldIE;
 		
-		self.scrollWrap = framework.getChildByClass(template, 'pswp_scroll-wrap');
-		self.container = framework.getChildByClass(self.scrollWrap, 'pswp_container');
+		self.scrollWrap = framework.getChildByClass(template, 'pswp__scroll-wrap');
+		self.container = framework.getChildByClass(self.scrollWrap, 'pswp__container');
 
 		_containerStyle = self.container.style; // for fast access
 
@@ -873,16 +873,16 @@ var publicMethods = {
 		}
 		
 		// add classes to root element of PhotoSwipe
-		var rootClasses = 'pswp-open ';
+		var rootClasses = 'pswp--open ';
 		if(_options.mainClass) {
 			rootClasses += _options.mainClass + ' ';
 		}
 		if(_options.showHideOpacity) {
-			rootClasses += 'pswp-animate_opacity ';
+			rootClasses += 'pswp--animate_opacity ';
 		}
-		rootClasses += _likelyTouchDevice ? 'pswp-touch' : 'pswp-notouch';
-		rootClasses += _features.animationName ? ' pswp-css_animation' : '';
-		rootClasses += _features.svg ? ' pswp-svg' : '';
+		rootClasses += _likelyTouchDevice ? 'pswp--touch' : 'pswp--notouch';
+		rootClasses += _features.animationName ? ' pswp--css_animation' : '';
+		rootClasses += _features.svg ? ' pswp--svg' : '';
 		framework.addClass(template, rootClasses);
 
 		self.updateSize();
@@ -940,7 +940,7 @@ var publicMethods = {
 			}, 1000);
 		}
 
-		framework.addClass(template, 'pswp-visible');
+		framework.addClass(template, 'pswp--visible');
 	},
 
 	// Closes the gallery, then destroy it
@@ -1055,7 +1055,7 @@ var publicMethods = {
 		// itemHolder[1] is middle (current) item
 		if(_itemHolders[1].el.children.length) {
 			var zoomElement = _itemHolders[1].el.children[0];
-			if( framework.hasClass(zoomElement, 'pswp_zoom-wrap') ) {
+			if( framework.hasClass(zoomElement, 'pswp__zoom-wrap') ) {
 				_currZoomElementStyle = zoomElement.style;
 			} else {
 				_currZoomElementStyle = null;
@@ -1391,7 +1391,7 @@ var _gestureStartTime,
 	  	}
 
 	  	// don't search elements above pswp__scroll-wrap
-	  	if(el.className && el.className.indexOf('pswp_scroll-wrap') > -1 ) {
+	  	if(el.className && el.className.indexOf('pswp__scroll-wrap') > -1 ) {
 	  		return false;
 	  	}
 
@@ -2502,7 +2502,7 @@ var _showOrHideTimeout,
 				if(img) {
 					img.style.display = 'block';
 				}
-				framework.addClass(template, 'pswp-animated-in');
+				framework.addClass(template, 'pswp--animated-in');
 				_shout('initialZoom' + (out ? 'OutEnd' : 'InEnd'));
 			} else {
 				self.template.removeAttribute('style');
@@ -2557,15 +2557,15 @@ var _showOrHideTimeout,
 			_registerStartAnimation('initialZoom');
 			
 			if(out && !closeWithRaf) {
-				framework.removeClass(template, 'pswp-animated-in');
+				framework.removeClass(template, 'pswp--animated-in');
 			}
 
 			if(fadeEverything) {
 				if(out) {
-					framework[ (closeWithRaf ? 'remove' : 'add') + 'Class' ](template, 'pswp-animate_opacity');
+					framework[ (closeWithRaf ? 'remove' : 'add') + 'Class' ](template, 'pswp--animate_opacity');
 				} else {
 					setTimeout(function() {
-						framework.addClass(template, 'pswp-animate_opacity');
+						framework.addClass(template, 'pswp--animate_opacity');
 					}, 30);
 				}
 			}
@@ -2662,7 +2662,7 @@ var _items,
 	_initialZoomRunning,
 	_controllerDefaultOptions = {
 		index: 0,
-		errorMsg: '<div class="pswp_error-msg"><a href="%url%" target="_blank">The image</a> could not be loaded.</div>',
+		errorMsg: '<div class="pswp__error-msg"><a href="%url%" target="_blank">The image</a> could not be loaded.</div>',
 		forceProgressiveLoading: false, // TODO
 		preload: [1,1],
 		getNumItemsFn: function() {
@@ -2818,7 +2818,7 @@ var _getItemAt,
 	_preloadImage = function(item) {
 		item.loading = true;
 		item.loaded = false;
-		var img = item.img = framework.createEl('pswp_img', 'img');
+		var img = item.img = framework.createEl('pswp__img', 'img');
 		var onComplete = function() {
 			item.loading = false;
 			item.loaded = true;
@@ -2998,7 +2998,7 @@ _registerModule('Controller', {
 			holder.item = item;
 
 			// base container DIV is created only once for each of 3 holders
-			var baseDiv = item.container = framework.createEl('pswp_zoom-wrap'); 
+			var baseDiv = item.container = framework.createEl('pswp__zoom-wrap'); 
 
 			
 
@@ -3069,8 +3069,8 @@ _registerModule('Controller', {
 
 				if(framework.features.transform) {
 					
-					var placeholderClassName = 'pswp_img pswp_img-placeholder'; 
-					placeholderClassName += (item.msrc ? '' : ' pswp_img-placeholder-blank');
+					var placeholderClassName = 'pswp__img pswp__img--placeholder'; 
+					placeholderClassName += (item.msrc ? '' : ' pswp__img--placeholder--blank');
 
 					var placeholder = framework.createEl(placeholderClassName, item.msrc ? 'img' : '');
 					if(item.msrc) {
@@ -3110,7 +3110,7 @@ _registerModule('Controller', {
 				
 			} else if(item.src && !item.loadError) {
 				// image object is created every time, due to bugs of image loading & delay when switching images
-				img = framework.createEl('pswp_img', 'img');
+				img = framework.createEl('pswp__img', 'img');
 				img.style.webkitBackfaceVisibility = 'hidden';
 				img.style.opacity = 1;
 				img.src = item.src;
@@ -3206,7 +3206,7 @@ _registerModule('Tap', {
 
 				var clickedTagName = e.target.tagName.toUpperCase();
 				// avoid double tap delay on buttons and elements that have class pswp__single-tap
-				if(clickedTagName === 'BUTTON' || framework.hasClass(e.target, 'pswp_single-tap') ) {
+				if(clickedTagName === 'BUTTON' || framework.hasClass(e.target, 'pswp__single-tap') ) {
 					_dispatchTapEvent(e, releasePoint);
 					return;
 				}
@@ -3282,19 +3282,19 @@ _registerModule('DesktopZoom', {
 			var hasDraggingClass,
 				updateZoomable = function() {
 					if(self.mouseZoomedIn) {
-						framework.removeClass(template, 'pswp-zoomed-in');
+						framework.removeClass(template, 'pswp--zoomed-in');
 						self.mouseZoomedIn = false;
 					}
 					if(_currZoomLevel < 1) {
-						framework.addClass(template, 'pswp-zoom-allowed');
+						framework.addClass(template, 'pswp--zoom-allowed');
 					} else {
-						framework.removeClass(template, 'pswp-zoom-allowed');
+						framework.removeClass(template, 'pswp--zoom-allowed');
 					}
 					removeDraggingClass();
 				},
 				removeDraggingClass = function() {
 					if(hasDraggingClass) {
-						framework.removeClass(template, 'pswp-dragging');
+						framework.removeClass(template, 'pswp--dragging');
 						hasDraggingClass = false;
 					}
 				};
@@ -3304,7 +3304,7 @@ _registerModule('DesktopZoom', {
 			_listen('pointerDown', function() {
 				if(self.mouseZoomedIn) {
 					hasDraggingClass = true;
-					framework.addClass(template, 'pswp-dragging');
+					framework.addClass(template, 'pswp--dragging');
 				}
 			});
 			_listen('pointerUp', removeDraggingClass);
@@ -3363,7 +3363,7 @@ _registerModule('DesktopZoom', {
 			self.mouseZoomedIn = !zoomOut;
 
 			self.zoomTo(zoomOut ? self.currItem.initialZoomLevel : doubleTapZoomLevel, centerPoint, 333);
-			framework[ (!zoomOut ? 'add' : 'remove') + 'Class'](template, 'pswp-zoomed-in');
+			framework[ (!zoomOut ? 'add' : 'remove') + 'Class'](template, 'pswp--zoomed-in');
 		}
 
 	}
