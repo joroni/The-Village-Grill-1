@@ -619,8 +619,8 @@ li.item-has-children {
 }
 */
 ul.sub-menu li.activechild {
-    background: none repeat scroll 0 0 #950041;
-    border-top: 1px solid #b70050;
+    background: none repeat scroll 0 0 #2d2f32;
+    border-top: 0px solid #b70050;
 }
 
 div#banner header h1 img {
@@ -634,7 +634,7 @@ div.ui-loader.ui-corner-all.ui-body-a.ui-loader-default h1 {
 	font-size:.05em !important;
 }
 li.item-has-children.active {
-	background:url("../img/a23.png") no-repeat scroll 215px 17px #b70050 !important;
+	background:url("../img/a23.png") no-repeat scroll 215px 17px #282b30 !important;
 }
 div.prod-details {
     float: left;

@@ -155,7 +155,7 @@ ul,ol,h1,h2,h3,h4,h5,h6,p { display: block; }
 }
 
 #w #navmenu ul li a:hover { color: #a71309; text-decoration: none; }
-#w #navmenu ul li a:active { background:#b70050; color: #cad0e6; text-decoration: none; }
+#w #navmenu ul li a:active { background:#333; color: #cad0e6; text-decoration: none; }
 #w #navmenu ul li a:after {
     content: '';
     display: block;

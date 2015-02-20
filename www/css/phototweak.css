@@ -140,13 +140,12 @@ ul,ol,h1,h2,h3,h4,h5,h6,p { display: block; }
     transform: rotate(45deg);
 }
 
-#w #navmenu ul li a:hover:after, #w #navmenu ul li:active { background:none !important; }
-li.active {
- 
-	  background: none repeat scroll 0 0 #b70050 !important;
-    border-top: 1px solid #dc3433;
-    border-bottom: 1px solid #2d0303;
+/*li.active {
+    background: none repeat scroll 0 0 #333 !important;
+    border-bottom: 1px solid #222;
+    border-top: 0px solid #444;
 }
+*/
 /** @group misc **/
 .blue { color: #1c609f !important; font-weight: bold; }
 /** @group clearfix **/
@@ -488,9 +487,11 @@ body {
 }
 
 .pswp img {
-    border: 10px solid rgba(255,255, 255, 0.5) !important;
+    border: 10px solid rgba(255,255, 255, 1) !important;
     max-width: none;
     top: -5% !important;
+	max-width:844px !important;
+	max-height:844px !important;
 }
 
 
